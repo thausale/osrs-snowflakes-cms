@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "channels",
+  "info": {
+    "singularName": "channel",
+    "pluralName": "channels",
+    "displayName": "Channel"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "channelId": {
+      "type": "uid"
+    },
+    "channelData": {
+      "type": "json"
+    },
+    "channelLastFetched": {
+      "type": "datetime"
+    },
+    "playlists": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::playlist.playlist",
+      "mappedBy": "channel"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subscriberCount": {
+      "type": "integer"
+    },
+    "viewCount": {
+      "type": "integer"
+    }
+  }
+}

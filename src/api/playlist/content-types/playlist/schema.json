@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "playlists",
+  "info": {
+    "singularName": "playlist",
+    "pluralName": "playlists",
+    "displayName": "Playlist"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "playlistId": {
+      "type": "uid"
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^(https?:\\/\\/)(?:www\\.|m\\.)?(?:youtube\\.com|music\\.youtube\\.com|youtu\\.be)\\/(?:(?:playlist|watch)\\?[^#\\s]*\\blist=|[^?#\\s]+\\?[^#\\s]*\\blist=)[A-Za-z0-9_-]{10,}(?:[^\\s#]*)?$"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "playlists"
+    },
+    "youtube_api_last_fetch": {
+      "type": "datetime"
+    },
+    "youtube_api_data": {
+      "type": "json"
+    },
+    "channel": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::channel.channel",
+      "inversedBy": "playlists"
+    },
+    "itemCount": {
+      "type": "integer"
+    },
+    "isCompleted": {
+      "type": "boolean"
+    },
+    "lastUploadedAt": {
+      "type": "datetime"
+    }
+  }
+}
