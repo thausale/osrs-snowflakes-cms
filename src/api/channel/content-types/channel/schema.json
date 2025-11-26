@@ -34,6 +34,12 @@
     },
     "viewCount": {
       "type": "integer"
+    },
+    "marathon_videos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::marathon-video.marathon-video",
+      "mappedBy": "channel"
     }
   }
 }

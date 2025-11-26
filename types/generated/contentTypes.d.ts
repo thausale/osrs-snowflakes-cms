@@ -451,6 +451,10 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       'api::category.category'
     > &
       Schema.Attribute.Private;
+    marathon_videos: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::marathon-video.marathon-video'
+    >;
     Name: Schema.Attribute.String;
     playlists: Schema.Attribute.Relation<
       'manyToMany',
@@ -486,6 +490,10 @@ export interface ApiChannelChannel extends Struct.CollectionTypeSchema {
       'api::channel.channel'
     > &
       Schema.Attribute.Private;
+    marathon_videos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::marathon-video.marathon-video'
+    >;
     playlists: Schema.Attribute.Relation<'oneToMany', 'api::playlist.playlist'>;
     publishedAt: Schema.Attribute.DateTime;
     subscriberCount: Schema.Attribute.Integer;
@@ -494,6 +502,44 @@ export interface ApiChannelChannel extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     viewCount: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiMarathonVideoMarathonVideo
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'marathon_videos';
+  info: {
+    displayName: 'Marathon videos';
+    pluralName: 'marathon-videos';
+    singularName: 'marathon-video';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
+    channel: Schema.Attribute.Relation<'manyToOne', 'api::channel.channel'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::marathon-video.marathon-video'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    uploadedAt: Schema.Attribute.DateTime;
+    url: Schema.Attribute.String;
+    youtube_api_data: Schema.Attribute.JSON;
   };
 }
 
@@ -1052,6 +1098,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
       'api::channel.channel': ApiChannelChannel;
+      'api::marathon-video.marathon-video': ApiMarathonVideoMarathonVideo;
       'api::playlist.playlist': ApiPlaylistPlaylist;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

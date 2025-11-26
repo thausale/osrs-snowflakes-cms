@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "marathon_videos",
+  "info": {
+    "singularName": "marathon-video",
+    "pluralName": "marathon-videos",
+    "displayName": "Marathon videos"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "marathon_videos"
+    },
+    "youtube_api_data": {
+      "type": "json"
+    },
+    "channel": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::channel.channel",
+      "inversedBy": "marathon_videos"
+    },
+    "uploadedAt": {
+      "type": "datetime"
+    }
+  }
+}

@@ -29,6 +29,12 @@
       "relation": "manyToMany",
       "target": "api::playlist.playlist",
       "inversedBy": "categories"
+    },
+    "marathon_videos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::marathon-video.marathon-video",
+      "mappedBy": "categories"
     }
   }
 }

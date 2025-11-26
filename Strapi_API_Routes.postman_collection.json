@@ -1,0 +1,1417 @@
+{
+	"info": {
+		"_postman_id": "strapi-api-routes",
+		"name": "Strapi API Routes",
+		"description": "Complete collection of all Strapi API routes for OSRS Snowflakes CMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Playlists",
+			"item": [
+				{
+					"name": "Get All Playlists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*&pagination[page]=1&pagination[pageSize]=25&sort=id:desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*",
+									"description": "Populate all relations"
+								},
+								{
+									"key": "pagination[page]",
+									"value": "1"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "25"
+								},
+								{
+									"key": "sort",
+									"value": "id:desc"
+								}
+							]
+						},
+						"description": "Get all playlists with pagination, sorting, and population"
+					}
+				},
+				{
+					"name": "Get Playlist by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists/:id?populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists",
+								":id"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get a single playlist by document ID"
+					}
+				},
+				{
+					"name": "Get Playlist by playlistId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[playlistId][$eq]=:playlistId&populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[playlistId][$eq]",
+									"value": ":playlistId"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get a playlist by its playlistId (UID field)"
+					}
+				},
+				{
+					"name": "Create Playlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"playlistId\": \"PLrAXtmRdnEQy6nuLMH7xY4QjO7n8_QgxX\",\n    \"url\": \"https://www.youtube.com/playlist?list=PLrAXtmRdnEQy6nuLMH7xY4QjO7n8_QgxX\",\n    \"Title\": \"Example Playlist\",\n    \"Description\": \"Playlist description\",\n    \"itemCount\": 10,\n    \"isCompleted\": false,\n    \"lastUploadedAt\": \"2024-01-01T00:00:00.000Z\",\n    \"youtube_api_last_fetch\": \"2024-01-01T00:00:00.000Z\",\n    \"youtube_api_data\": {},\n    \"channel\": 1,\n    \"categories\": [1, 2]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							]
+						},
+						"description": "Create a new playlist"
+					}
+				},
+				{
+					"name": "Update Playlist",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"Title\": \"Updated Playlist Title\",\n    \"itemCount\": 15,\n    \"isCompleted\": true\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/playlists/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists",
+								":id"
+							]
+						},
+						"description": "Update a playlist by document ID"
+					}
+				},
+				{
+					"name": "Delete Playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists",
+								":id"
+							]
+						},
+						"description": "Delete a playlist by document ID"
+					}
+				},
+				{
+					"name": "Filter Playlists - Recently Updated",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*&sort=lastUploadedAt:desc&filters[lastUploadedAt][$notNull]=true&pagination[pageSize]=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "sort",
+									"value": "lastUploadedAt:desc"
+								},
+								{
+									"key": "filters[lastUploadedAt][$notNull]",
+									"value": "true"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get recently updated playlists"
+					}
+				},
+				{
+					"name": "Filter Playlists - By Channel",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*&filters[channel][id][$eq]=:channelId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[channel][id][$eq]",
+									"value": ":channelId"
+								}
+							]
+						},
+						"description": "Get playlists filtered by channel"
+					}
+				},
+				{
+					"name": "Filter Playlists - By Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*&filters[categories][id][$eq]=:categoryId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[categories][id][$eq]",
+									"value": ":categoryId"
+								}
+							]
+						},
+						"description": "Get playlists filtered by category"
+					}
+				},
+				{
+					"name": "Filter Playlists - Completed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*&filters[isCompleted][$eq]=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[isCompleted][$eq]",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Get completed playlists"
+					}
+				}
+			]
+		},
+		{
+			"name": "Channels",
+			"item": [
+				{
+					"name": "Get All Channels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels?populate=*&pagination[page]=1&pagination[pageSize]=25&sort=id:desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[page]",
+									"value": "1"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "25"
+								},
+								{
+									"key": "sort",
+									"value": "id:desc"
+								}
+							]
+						},
+						"description": "Get all channels with pagination, sorting, and population"
+					}
+				},
+				{
+					"name": "Get Channel by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels/:id?populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels",
+								":id"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get a single channel by document ID"
+					}
+				},
+				{
+					"name": "Get Channel by channelId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels?filters[channelId][$eq]=:channelId&populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "filters[channelId][$eq]",
+									"value": ":channelId"
+								},
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get a channel by its channelId (UID field)"
+					}
+				},
+				{
+					"name": "Create Channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"channelId\": \"UC_x5XG1OV2P6uZZ5FSM9Ttw\",\n    \"title\": \"Example Channel\",\n    \"subscriberCount\": 1000,\n    \"viewCount\": 50000,\n    \"channelData\": {},\n    \"channelLastFetched\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/channels",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							]
+						},
+						"description": "Create a new channel"
+					}
+				},
+				{
+					"name": "Update Channel",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"title\": \"Updated Channel Title\",\n    \"subscriberCount\": 2000,\n    \"viewCount\": 100000\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/channels/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels",
+								":id"
+							]
+						},
+						"description": "Update a channel by document ID"
+					}
+				},
+				{
+					"name": "Delete Channel",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels",
+								":id"
+							]
+						},
+						"description": "Delete a channel by document ID"
+					}
+				},
+				{
+					"name": "Get Channel with Playlists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels/:id?populate[playlists][populate]=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels",
+								":id"
+							],
+							"query": [
+								{
+									"key": "populate[playlists][populate]",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get channel with nested playlists populated"
+					}
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories?populate=*&pagination[page]=1&pagination[pageSize]=25&sort=id:desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "pagination[page]",
+									"value": "1"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "25"
+								},
+								{
+									"key": "sort",
+									"value": "id:desc"
+								}
+							]
+						},
+						"description": "Get all categories with pagination, sorting, and population"
+					}
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/:id?populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get a single category by document ID"
+					}
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"Name\": \"Example Category\",\n    \"playlists\": [1, 2]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						},
+						"description": "Create a new category"
+					}
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"Name\": \"Updated Category Name\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							]
+						},
+						"description": "Update a category by document ID"
+					}
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							]
+						},
+						"description": "Delete a category by document ID"
+					}
+				},
+				{
+					"name": "Get Category with Playlists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/:id?populate[playlists][populate]=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							],
+							"query": [
+								{
+									"key": "populate[playlists][populate]",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Get category with nested playlists populated"
+					}
+				}
+			]
+		},
+		{
+			"name": "Media/Upload",
+			"item": [
+				{
+					"name": "Upload File",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						},
+						"description": "Upload a file to Strapi media library"
+					}
+				},
+				{
+					"name": "Upload Multiple Files",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						},
+						"description": "Upload multiple files to Strapi media library"
+					}
+				},
+				{
+					"name": "Get All Media Files",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/upload/files?pagination[page]=1&pagination[pageSize]=25",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"files"
+							],
+							"query": [
+								{
+									"key": "pagination[page]",
+									"value": "1"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "25"
+								}
+							]
+						},
+						"description": "Get all uploaded media files"
+					}
+				},
+				{
+					"name": "Get Media File by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/upload/files/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"files",
+								":id"
+							]
+						},
+						"description": "Get a single media file by ID"
+					}
+				},
+				{
+					"name": "Delete Media File",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/upload/files/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"files",
+								":id"
+							]
+						},
+						"description": "Delete a media file by ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "Query Parameters Examples",
+			"item": [
+				{
+					"name": "Pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?pagination[page]=1&pagination[pageSize]=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "pagination[page]",
+									"value": "1",
+									"description": "Page number (starts at 1)"
+								},
+								{
+									"key": "pagination[pageSize]",
+									"value": "10",
+									"description": "Items per page (max 100)"
+								}
+							]
+						},
+						"description": "Example of pagination parameters"
+					}
+				},
+				{
+					"name": "Sorting",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?sort=id:desc&sort=Title:asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id:desc",
+									"description": "Sort by id descending"
+								},
+								{
+									"key": "sort",
+									"value": "Title:asc",
+									"description": "Then sort by Title ascending"
+								}
+							]
+						},
+						"description": "Example of sorting (multiple fields supported)"
+					}
+				},
+				{
+					"name": "Population - All Relations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate=*",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*",
+									"description": "Populate all relations"
+								}
+							]
+						},
+						"description": "Populate all relations"
+					}
+				},
+				{
+					"name": "Population - Specific Fields",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?populate[channel][fields][0]=title&populate[channel][fields][1]=channelId&populate[categories][fields][0]=Name",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "populate[channel][fields][0]",
+									"value": "title"
+								},
+								{
+									"key": "populate[channel][fields][1]",
+									"value": "channelId"
+								},
+								{
+									"key": "populate[categories][fields][0]",
+									"value": "Name"
+								}
+							]
+						},
+						"description": "Populate specific relation fields"
+					}
+				},
+				{
+					"name": "Filters - Equality",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[isCompleted][$eq]=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[isCompleted][$eq]",
+									"value": "true",
+									"description": "Equal to"
+								}
+							]
+						},
+						"description": "Filter by equality"
+					}
+				},
+				{
+					"name": "Filters - Not Equal",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[isCompleted][$ne]=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[isCompleted][$ne]",
+									"value": "false",
+									"description": "Not equal to"
+								}
+							]
+						},
+						"description": "Filter by not equal"
+					}
+				},
+				{
+					"name": "Filters - Greater Than",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels?filters[subscriberCount][$gt]=1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "filters[subscriberCount][$gt]",
+									"value": "1000",
+									"description": "Greater than"
+								}
+							]
+						},
+						"description": "Filter by greater than"
+					}
+				},
+				{
+					"name": "Filters - Less Than",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels?filters[subscriberCount][$lt]=5000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "filters[subscriberCount][$lt]",
+									"value": "5000",
+									"description": "Less than"
+								}
+							]
+						},
+						"description": "Filter by less than"
+					}
+				},
+				{
+					"name": "Filters - Contains",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/channels?filters[title][$contains]=Example",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "filters[title][$contains]",
+									"value": "Example",
+									"description": "Contains string (case-sensitive)"
+								}
+							]
+						},
+						"description": "Filter by contains (string search)"
+					}
+				},
+				{
+					"name": "Filters - Not Null",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[lastUploadedAt][$notNull]=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[lastUploadedAt][$notNull]",
+									"value": "true",
+									"description": "Field is not null"
+								}
+							]
+						},
+						"description": "Filter by not null"
+					}
+				},
+				{
+					"name": "Filters - In Array",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[id][$in][0]=1&filters[id][$in][1]=2&filters[id][$in][2]=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[id][$in][0]",
+									"value": "1"
+								},
+								{
+									"key": "filters[id][$in][1]",
+									"value": "2"
+								},
+								{
+									"key": "filters[id][$in][2]",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Filter by value in array"
+					}
+				},
+				{
+					"name": "Filters - Between Dates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?filters[lastUploadedAt][$gte]=2024-01-01T00:00:00.000Z&filters[lastUploadedAt][$lte]=2024-12-31T23:59:59.999Z",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "filters[lastUploadedAt][$gte]",
+									"value": "2024-01-01T00:00:00.000Z",
+									"description": "Greater than or equal (date)"
+								},
+								{
+									"key": "filters[lastUploadedAt][$lte]",
+									"value": "2024-12-31T23:59:59.999Z",
+									"description": "Less than or equal (date)"
+								}
+							]
+						},
+						"description": "Filter by date range"
+					}
+				},
+				{
+					"name": "Fields Selection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/playlists?fields[0]=Title&fields[1]=playlistId&fields[2]=itemCount",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "fields[0]",
+									"value": "Title"
+								},
+								{
+									"key": "fields[1]",
+									"value": "playlistId"
+								},
+								{
+									"key": "fields[2]",
+									"value": "itemCount"
+								}
+							]
+						},
+						"description": "Select specific fields to return"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:1337",
+			"type": "string"
+		},
+		{
+			"key": "api_token",
+			"value": "your-api-token-here",
+			"type": "string"
+		}
+	]
+}
+
