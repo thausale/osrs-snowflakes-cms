@@ -538,7 +538,9 @@ export interface ApiMarathonVideoMarathonVideo
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     uploadedAt: Schema.Attribute.DateTime;
-    url: Schema.Attribute.String;
+    url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     youtube_api_data: Schema.Attribute.JSON;
   };
 }
