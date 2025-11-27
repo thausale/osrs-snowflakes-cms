@@ -39,6 +39,9 @@
     },
     "uploadedAt": {
       "type": "datetime"
+    },
+    "duration": {
+      "type": "string"
     }
   }
 }
